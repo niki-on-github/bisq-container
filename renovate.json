@@ -1,0 +1,32 @@
+{
+  "extends": ["config:base"],
+  "schedule": ["before 4am"],
+  "automerge": true,
+  "ignoreTests": true,
+  "platformAutomerge": true,
+  "prHourlyLimit": 99,
+  "prConcurrentLimit": 99,
+  "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": [
+        "ARG BISQ_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      ],
+      "depNameTemplate": "bisq-network/bisq",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+\\.\\d+)",
+      "currentValueTemplate": "{{#if currentValue}}{{{currentValue}}}{{else}}0.0.0{{/if}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["bisq-network/bisq"],
+      "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)"
+    },
+    {
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
+}

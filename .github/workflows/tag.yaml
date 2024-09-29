@@ -1,0 +1,38 @@
+
+name: Create Tag on Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  create_tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create and push tag
+        id: extract_version
+        run: |
+          cleaned_pr_title=$(echo "${{ github.event.pull_request.title }}" | sed 's/"//g')
+          echo "$cleaned_pr_title"
+          if [[ "$cleaned_pr_title" == *"dependency bisq-network/bisq to v"* ]]; then
+            version=$(echo "${{ github.event.pull_request.title }}" | grep -oP 'v\d+\.\d+\.\d+')
+            echo "create tag $version"
+            echo "version=$version" >> $GITHUB_OUTPUT
+          else
+            echo "PR title does not match the required format. No tag will be created."
+            exit 0
+          fi
+
+      - name: Create Release
+        if: steps.extract_version.outputs.version
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        with:
+          tag_name: ${{ steps.extract_version.outputs.version }}
+          release_name: Release ${{ steps.extract_version.outputs.version }}
+          draft: false
+          prerelease: false
