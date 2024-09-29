@@ -2,6 +2,9 @@
 
 Run the peer-to-peer bitcoin exchange system **Bisq** inside a container for easy deployment on your homelab server.
 
+> [!TIP]
+> Bisq2 container is available at https://github.com/niki-on-github/bisq2-container
+
 ## Quickstart
 
 ```sh
