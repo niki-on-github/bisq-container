@@ -1,6 +1,6 @@
 FROM jlesage/baseimage-gui:ubuntu-24.04-v4.6
 
-ARG BISQ_VERSION=1.9.17
+ARG BISQ_VERSION=1.9.16
 
 ENV BISQ_DEBFILE Bisq-64bit-$BISQ_VERSION.deb
 ENV BISQ_DOL_URL https://github.com/bisq-network/bisq/releases/download/v$BISQ_VERSION/$BISQ_DEBFILE
