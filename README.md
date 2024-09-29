@@ -1,4 +1,4 @@
-# Bisq2 Container
+# Bisq Container
 
 Run the peer-to-peer bitcoin exchange system **Bisq** inside a container for easy deployment on your homelab server.
 
