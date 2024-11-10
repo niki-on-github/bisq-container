@@ -1,14 +1,21 @@
 {
-  "extends": ["config:base"],
-  "schedule": ["before 4am"],
+  "extends": [
+    "config:recommended"
+  ],
+  "schedule": [
+    "before 4am"
+  ],
   "automerge": true,
   "ignoreTests": true,
   "platformAutomerge": true,
   "prHourlyLimit": 99,
   "prConcurrentLimit": 99,
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["^Dockerfile$"],
+      "customType": "regex",
+      "fileMatch": [
+        "^Dockerfile$"
+      ],
       "matchStrings": [
         "ARG BISQ_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ],
@@ -21,11 +28,19 @@
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["bisq-network/bisq"],
+      "matchPackageNames": [
+        "bisq-network/bisq"
+      ],
       "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)"
     },
     {
-      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": true
     }
   ]
