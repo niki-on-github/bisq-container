@@ -27,7 +27,7 @@ jobs:
         swap-storage: true
 
     - name: Checkout
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Prepare
       id: prep
