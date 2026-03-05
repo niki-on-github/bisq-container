@@ -58,7 +58,7 @@ jobs:
         echo "github_server_url=\"${GITHUB_SERVER_URL}\"" >> $GITHUB_OUTPUT
 
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3
+      uses: docker/setup-qemu-action@v4
       with:
         platforms: all
 
